@@ -15,11 +15,11 @@ NestJS, Prisma ORM, PostgreSQL, JWT (`@nestjs/jwt`), bcrypt
 | POST   | `/auth/login`   | Log in, returns a JWT                 | No             |
 | GET    | `/users`        | List users (supports `?search=`)      | Yes            |
 | GET    | `/users/:id`    | Get a single user                     | Yes            |
-| POST   | `/users`        | Create a user                         | No             |
+| POST   | `/users`        | Create a user                         | Yes            |
 | PATCH  | `/users/:id`    | Update a user                         | Yes            |
 | DELETE | `/users/:id`    | Delete a user                         | Yes            |
 
-All `/users` routes require a valid JWT sent as `Authorization: Bearer <token>`, except `POST /users` (account creation), which is public.
+All `/users` routes require a valid JWT sent as `Authorization: Bearer <token>`.
 
 Passwords are hashed with bcrypt and never included in API responses.
 
@@ -46,6 +46,8 @@ npm run start:dev
 ```
 
 The API will be available at `http://localhost:3000`.
+
+Since all `/users` routes (including account creation) require a JWT, you'll need to create a first user directly in the database before you can log in. Easiest way: temporarily comment out `@UseGuards(JwtAuthGuard)` in `users.controller.ts`, create a user via `POST /users`, then restore the guard.
 
 ## Roadmap
 
