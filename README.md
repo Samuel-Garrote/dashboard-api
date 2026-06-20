@@ -13,11 +13,13 @@ NestJS, Prisma ORM, PostgreSQL, JWT (`@nestjs/jwt`), bcrypt
 | Method | Endpoint        | Description                          | Auth required |
 |--------|-----------------|---------------------------------------|----------------|
 | POST   | `/auth/login`   | Log in, returns a JWT                 | No             |
-| GET    | `/users`        | List users (supports `?search=`)      | No             |
-| GET    | `/users/:id`    | Get a single user                     | No             |
+| GET    | `/users`        | List users (supports `?search=`)      | Yes            |
+| GET    | `/users/:id`    | Get a single user                     | Yes            |
 | POST   | `/users`        | Create a user                         | No             |
-| PATCH  | `/users/:id`    | Update a user                         | No             |
-| DELETE | `/users/:id`    | Delete a user                         | No             |
+| PATCH  | `/users/:id`    | Update a user                         | Yes            |
+| DELETE | `/users/:id`    | Delete a user                         | Yes            |
+
+All `/users` routes require a valid JWT sent as `Authorization: Bearer <token>`, except `POST /users` (account creation), which is public.
 
 Passwords are hashed with bcrypt and never included in API responses.
 
