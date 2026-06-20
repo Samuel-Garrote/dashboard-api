@@ -5,13 +5,7 @@ import { AuthService } from './auth.service';
 import { UsersModule } from '../users/users.module';
 
 @Module({
-  imports: [
-    UsersModule,
-    JwtModule.register({
-      secret: process.env.JWT_SECRET || 'dev-secret-change-me',
-      signOptions: { expiresIn: '1h' },
-    }),
-  ],
+  imports: [UsersModule],
   controllers: [AuthController],
   providers: [AuthService],
 })
